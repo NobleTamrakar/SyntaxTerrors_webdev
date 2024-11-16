@@ -1,0 +1,110 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - RJ International Hotel</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic styles for the page */
+        body {
+            font-family: sans-serif;
+            background-color: white;
+            color: blue;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Title box */
+        .title-box {
+            background-color: #2980b9; /* Darker blue background */
+            color: white; /* White text */
+            padding: 20px; /* Padding inside the box */
+            border-radius: 10px; /* Rounded corners */
+            text-align: center; /* Center text */
+            margin: 20px auto; /* Center the box with auto margin */
+            max-width: 800px; /* Max width for the box */
+        }
+
+        /* Form styles */
+        form {
+            max-width: 600px; /* Max width for the form */
+            margin: auto; /* Center the form */
+            background-color: #f2f2f2; /* Light gray background */
+            padding: 20px; /* Padding inside the form */
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        /* Style for labels */
+        label {
+            margin-top: 10px;
+            display: block; /* Display labels as block for better spacing */
+        }
+
+        /* Style for the button */
+        button {
+            background-color: #3498db; /* Blue background for the button */
+            color: white; /* White text */
+            padding: 10px 15px; /* Padding for the button */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            margin-top: 20px; /* Space above the button */
+            font-size: 1.2em; /* Font size for the button */
+        }
+
+        button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="title-box">
+            <h1>Contact Us</h1>
+        </div>
+    </header>
+
+    <main>
+        <form>
+            <label for="fname">First Name:</label>
+            <input type="text" name="fname" id="fname" required>
+
+            <label for="lname">Last Name:</label>
+            <input type="text" name="lname" id="lname" required>
+
+            <label for="gender">Gender:</label>
+            <label for="male">Male</label><input type="radio" name="gender" value="male" id="male"> 
+            <label for="female">Female</label><input type="radio" name="gender" value="female" id="female"> 
+            <br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" name="phone" id="phone" required>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+
+            <label for="address">Address:</label>
+            <textarea name="address" id="address" cols="50" rows="5" required></textarea>
+
+            <label>Dining:</label>
+            <input type="checkbox" name="dining" value="restaurant"> <label>Restaurant</label>
+            <input type="checkbox" name="dining" value="buffet"> <label>Buffet</label>
+            <input type="checkbox" name="dining" value="room service"> <label>Room Service</label>
+            <input type="checkbox" name="dining" value="none"> <label>None</label><br>
+
+            <label for="rooms">Select Room:</label>
+            <select name="rooms" id="rooms">
+                <option value="">Select Room</option>
+                <option value="single">Single Room</option>
+                <option value="double">Double Room</option>
+                <option value="suite">Suite</option>
+            </select>
+
+            <button type="submit">Confirm</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 RJ International Hotel. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
