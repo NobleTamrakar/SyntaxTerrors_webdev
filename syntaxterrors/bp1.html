@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cultural Tips & Phrases</title>
+  <style>
+    /* Basic Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Full-Screen Pop-Up Modal */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+      z-index: 9999;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .modal h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .modal p {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    .modal ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .modal ul li {
+      margin: 10px 0;
+    }
+
+    .modal button {
+      background-color: #ff6f61;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .modal button:hover {
+      background-color: #ff4f3f;
+    }
+
+    /* Banner at the bottom of the page */
+    .banner {
+      display: none;
+      background-color: #ff6f61;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      font-size: 1.2em;
+    }
+
+    .banner button {
+      background-color: #ff4f3f;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .banner button:hover {
+      background-color: #ff6f61;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Full-Screen Modal for Cultural Tips -->
+  <div id="culturalModal" class="modal">
+    <h2>Welcome to Bangalore!</h2>
+    <p><strong>Helpful Phrases:</strong></p>
+    <ul>
+      <li><strong>Hello:</strong> "Namaste"</li>
+      <li><strong>Thank you:</strong> "Dhanyavaad"</li>
+      <li><strong>Goodbye:</strong> "Alvida"</li>
+    </ul>
+    <p><strong>Cultural Tips:</strong></p>
+    <ul>
+      <li>It is customary to greet people with "Namaste" and a slight bow.</li>
+      <li>Always remove your shoes before entering someone's house or a temple.</li>
+      <li>Be respectful when interacting with elders – it’s an important part of the culture.</li>
+    </ul>
+    <button onclick="closeModal()">Close</button>
+  </div>
+
+  <!-- Bottom Banner for Quick Cultural Tips -->
+  <div id="culturalBanner" class="banner">
+    <h3>Quick Tip: Bangalore</h3>
+    <p>When visiting temples, be sure to dress modestly and remove your shoes before entering.</p>
+    <button onclick="closeBanner()">Got it!</button>
+  </div>
+
+  <script>
+    // Function to detect the user's location (this can be enhanced with real geolocation data)
+    function getUserRegion(callback) {
+      // This is a hardcoded region for demonstration purposes. In real usage, you could use geolocation APIs
+      let region = "Bangalore";  // Hardcoded for now
+      callback(region);
+    }
+
+    // Function to show the modal with cultural tips
+    function showModal(region) {
+      if (region === "Bangalore") {
+        document.getElementById("culturalModal").style.display = "block";
+      }
+    }
+
+    // Function to show the banner with a quick cultural tip
+    function showBanner(region) {
+      if (region === "Bangalore") {
+        document.getElementById("culturalBanner").style.display = "block";
+      }
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      document.getElementById("culturalModal").style.display = "none";
+    }
+
+    // Function to close the banner
+    function closeBanner() {
+      document.getElementById("culturalBanner").style.display = "none";
+    }
+
+    // Detect the region and display cultural tips (for demonstration purposes, it's hardcoded to "Bangalore")
+    getUserRegion(function(region) {
+      showModal(region);
+      showBanner(region);
+    });
+  </script>
+
+</body>
+</html>
