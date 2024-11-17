@@ -296,6 +296,7 @@ footer {
     font-size: 2em;
     font-weight:2em; 
     font-family:"Libre Baskerville", serif;
+  color:white;
 }
 .con{
     display:flex;
@@ -304,6 +305,7 @@ footer {
 .text7{
     font-size: 1em;
     font-weight:2em;
+  color: white;
 }
 nav .signin{
     display:flex;
