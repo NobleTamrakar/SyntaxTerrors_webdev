@@ -3,7 +3,33 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
 
+.hover-element {
+  display: inline-block;
+  position: relative;
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 1vw;
+}
 
+/* Tooltip styles */
+.hover-element::after {
+  content: "This is MoogAI!";
+  position: absolute;
+  top: 120%; /* Below the element */
+  left: 100%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+  opacity: 0;
+  visibility: hidden;
+  white-space: nowrap;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
 
 :root{
     --backgroundcolor: #372D35;
