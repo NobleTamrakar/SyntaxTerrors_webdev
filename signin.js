@@ -6,7 +6,7 @@ function validate() {
     var pswdd = document.getElementById("pswd").value;
 
     if (iddd === idd && pswdd === pswd) {
-        window.location.assign("index.html");
+        window.location.assign("moops.html");
     } else {
         alert("Invalid Email or Password!");
     }
