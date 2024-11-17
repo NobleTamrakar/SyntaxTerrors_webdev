@@ -6,8 +6,7 @@ function search() {
     
     // Check for empty input
     if (!queryName) {
-        alert(`Please enter a valid search query.
-        Try using: Bangalore Palace`);
+        alert(`Please enter a valid search query.`);
         return;
     }
     const result = data.find(item => item.name.toLowerCase() === queryName.toLowerCase());
@@ -162,7 +161,8 @@ function search() {
         newWindow.document.close();
     } else {
         // Alert if no match is found
-        alert("No matching result found.");
+        alert(`No matching result found.
+        Try : Bangalore Palace`);
     }
 }
 const data = [
