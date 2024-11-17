@@ -22,6 +22,7 @@ function search() {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
                 <link rel="stylesheet" href="geolocation.css" />
+                <link rel="icon" href="cow.jpg" type="image/x-icon">
                  <link rel="stylesheet" href="img.css" />
                 <title>${result.name}</title>
             </head>
