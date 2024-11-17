@@ -249,11 +249,13 @@ footer {
     font-size: 3em;
     font-weight: 10em;
     font-family:"Libre Baskerville", serif;
+  color: white;
 }
 .text1{
     font-size: 2em;
     font-weight: 5em;
     font-family:"Libre Baskerville", serif;
+  color: white;
 }
 .text2{
     padding: 0px 2px 2px 2px;
@@ -271,6 +273,7 @@ footer {
     font-weight:2em;
     font-family:"Dancing Script", cursive;
     color:var(--backgroundcolor7);
+  color: white;
 }
 .text4{
     display:flex;
@@ -278,6 +281,7 @@ footer {
     align-items:center;
     font-size: 3em;
     font-weight:5em;
+  color: white;
 }
 .text5{
     font-size: 1.5rem;
