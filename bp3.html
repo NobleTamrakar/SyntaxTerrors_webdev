@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visit Later: Bookmark Attractions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #000;
+      transition: background-color 0.3s, color 0.3s;
+      margin: 0;
+      padding: 0;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #fff;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .attraction {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+
+    .attraction h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    button {
+      padding: 8px 16px;
+      margin-left: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .bookmark-list {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .bookmark-list li {
+      padding: 8px;
+      background-color: #f4f4f4;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      font-size: 1.1rem;
+    }
+
+    .bookmark-list li:hover {
+      background-color: #ddd;
+    }
+
+    .bookmark-list > li{
+        color:#007bff;
+    }
+
+    #dark-mode-toggle {
+      background-color: #333;
+      color: grey;
+      margin-bottom: 20px;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    #dark-mode-toggle:hover {
+      background-color: #444;
+    }
+
+    .empty-bookmark-list {
+      font-style: italic;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <button id="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+    <h2>Explore and Save Attractions to Visit Later</h2>
+    <div class="attraction">
+      <h3>Beautiful Beach</h3>
+      <p>Relax by the ocean and enjoy sandy shores.</p>
+      <button onclick="toggleBookmark('Beautiful Beach')">Visit Later</button>
+    </div>
+    <div class="attraction">
+      <h3>Historic Castle</h3>
+      <p>Discover the rich history and stunning architecture.</p>
+      <button onclick="toggleBookmark('Historic Castle')">Visit Later</button>
+    </div>
+    <div class="attraction">
+      <h3>Mountain Trail</h3>
+      <p>Hike through scenic landscapes and breathtaking views.</p>
+      <button onclick="toggleBookmark('Mountain Trail')">Visit Later</button>
+    </div>
+
+    <h3>My Visit Later List</h3>
+    <ul id="bookmarks-list" class="bookmark-list">
+      <li class="empty-bookmark-list">No attractions added yet.</li>
+    </ul>
+  </div>
+
+  <script>
+    // Dark mode toggle logic
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle("dark-mode");
+      localStorage.setItem("darkMode", body.classList.contains("dark-mode"));
+    }
+
+    // Check for dark mode preference on page load
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark-mode");
+      }
+    });
+
+    // Bookmarking logic for "Visit Later" feature
+    let bookmarkedAttractions = [];
+
+    function toggleBookmark(attraction) {
+      const index = bookmarkedAttractions.indexOf(attraction);
+      if (index === -1) {
+        bookmarkedAttractions.push(attraction);
+      } else {
+        bookmarkedAttractions.splice(index, 1);
+      }
+      updateBookmarkList();
+    }
+
+    function updateBookmarkList() {
+      const bookmarksList = document.getElementById("bookmarks-list");
+      bookmarksList.innerHTML = '';  // Clear the current list
+
+      if (bookmarkedAttractions.length === 0) {
+        bookmarksList.innerHTML = '<li class="empty-bookmark-list">No attractions added yet.</li>';
+      } else {
+        bookmarkedAttractions.forEach(attraction => {
+          const listItem = document.createElement("li");
+          listItem.textContent = attraction;
+          bookmarksList.appendChild(listItem);
+        });
+      }
+    }
+  </script>
+
+</body>
+</html>

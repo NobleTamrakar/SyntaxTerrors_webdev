@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Rewards Celebration</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        label {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            display: inline-block;
+            text-align: left;
+            color: #333;
+        }
+
+        select, input[type="text"], textarea, input[type="range"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9rem;
+        }
+
+        .success {
+            color: green;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #ff6f61;
+            color: #fff;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #e55d50;
+        }
+
+        .reward-container {
+            margin-top: 40px;
+        }
+
+        .reward-message {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .reward-code {
+            font-size: 2rem;
+            color: #ff6f61;
+            margin-top: 10px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Confetti styles */
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .confetti div {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ffeb3b;
+            animation: confetti 2s infinite;
+        }
+
+        @keyframes confetti {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(500px) rotate(360deg);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                width: 80%;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            button {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to the Travel Rewards!</h1>
+
+    <!-- Review Section -->
+    <div class="container" id="reviewContainer">
+        <h2>Submit a Review</h2>
+        <div id="reviewError" class="error"></div>
+
+        <!-- Type of place visited -->
+        <label for="placeType">Select the type of place you visited:</label>
+        <select id="placeType" onchange="handlePlaceTypeChange()">
+            <option value="Temple">Temple</option>
+            <option value="Museum">Museum</option>
+            <option value="Hotel">Hotel</option>
+            <option value="Homestay">Homestay</option>
+            <option value="Park">Park</option>
+            <option value="Shopping Mall">Shopping Mall</option>
+            <option value="Restaurant">Restaurant</option>
+            <option value="Wildlife Sanctuary">Wildlife Sanctuary</option>
+            <option value="Beach">Beach</option>
+            <option value="Monument">Monument</option>
+            <option value="Cafe">Cafe</option>
+            <option value="Historic Site">Historic Site</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <!-- If 'Other' is selected, allow the user to specify the type of place -->
+        <div id="otherPlaceContainer" style="display: none;">
+            <label for="otherPlaceType">Please specify the type of place:</label>
+            <input type="text" id="otherPlaceType" placeholder="Enter the type of place">
+        </div>
+
+        <!-- How was the place? -->
+        <label for="placeRating">How was the place?</label>
+        <input type="range" id="placeRating" min="1" max="5" step="1" value="3">
+        <span id="placeRatingValue">3</span>/5
+
+        <!-- Rating Section -->
+        <label for="rating">What kind of rating would you give?</label>
+        <input type="range" id="rating" min="1" max="5" step="1" value="3">
+        <span id="ratingValue">3</span>/5
+
+        <!-- How was the surrounding? -->
+        <label for="surroundingRating">How was the surrounding area?</label>
+        <input type="range" id="surroundingRating" min="1" max="5" step="1" value="3">
+        <span id="surroundingRatingValue">3</span>/5
+
+        <!-- Extra Suggestions -->
+        <label for="reviewContent">Extra suggestions or comments:</label>
+        <textarea id="reviewContent" placeholder="Write your review here..." rows="4"></textarea>
+
+        <!-- Submit Button -->
+        <button onclick="submitReview()">Submit Review</button>
+    </div>
+
+    <!-- Reward Message and Code Section -->
+    <div class="reward-container">
+        <button class="reward-button" id="rewardButton" style="display:none;">Earn Reward Code!</button>
+        <div class="reward-message" id="rewardMessage"></div>
+        <div class="reward-code" id="rewardCode"></div>
+    </div>
+
+    <!-- Confetti Animation -->
+    <div id="confetti" class="confetti"></div>
+
+    <script>
+        // Update range value display
+        document.getElementById('placeRating').addEventListener('input', function() {
+            document.getElementById('placeRatingValue').textContent = this.value;
+        });
+
+        document.getElementById('rating').addEventListener('input', function() {
+            document.getElementById('ratingValue').textContent = this.value;
+        });
+
+        document.getElementById('surroundingRating').addEventListener('input', function() {
+            document.getElementById('surroundingRatingValue').textContent = this.value;
+        });
+
+        // Handle the selection of 'Other' place type
+        function handlePlaceTypeChange() {
+            const placeType = document.getElementById('placeType').value;
+            const otherPlaceContainer = document.getElementById('otherPlaceContainer');
+            
+            if (placeType === 'Other') {
+                otherPlaceContainer.style.display = 'block';
+            } else {
+                otherPlaceContainer.style.display = 'none';
+            }
+        }
+
+        // Submit the review and generate reward
+        function submitReview() {
+            const placeType = document.getElementById('placeType').value;
+            const otherPlaceType = document.getElementById('otherPlaceType').value;
+            const finalPlaceType = placeType === 'Other' ? otherPlaceType : placeType;
+
+            const placeRating = document.getElementById('placeRating').value;
+            const rating = document.getElementById('rating').value;
+            const surroundingRating = document.getElementById('surroundingRating').value;
+            const reviewContent = document.getElementById('reviewContent').value;
+
+            if (reviewContent.trim() === '') {
+                document.getElementById('reviewError').textContent = "Please enter your review.";
+                return;
+            }
+
+            document.getElementById('reviewError').textContent = '';
+
+            // Calculate reward points based on ratings
+            const rewardPoints = calculateRewardPoints(placeRating, rating, surroundingRating);
+
+            // Show reward message and code
+            const rewardMessage = document.getElementById('rewardMessage');
+            const rewardCode = document.getElementById('rewardCode');
+            rewardMessage.textContent = `Congratulations! You've earned ${rewardPoints} points for visiting a ${finalPlaceType}!`;
+            rewardCode.textContent = "Your Reward Code: TRAVEL-" + Math.random().toString(36).substr(2, 8).toUpperCase();
+
+            // Show reward button
+            document.getElementById('rewardButton').style.display = 'block';
+
+            // Trigger confetti animation
+            createConfetti();
+        }
+
+        // Confetti generation function
+        function createConfetti() {
+            const confetti = document.getElementById('confetti');
+            confetti.innerHTML = ''; // Clear any previous confetti
+            for (let i = 0; i < 100; i++) {
+                const confettiPiece = document.createElement('div');
+                const xPos = Math.random() * window.innerWidth;
+                const delay = Math.random() * 2;
+                const animationDuration = 2 + Math.random() * 2;
+
+                confettiPiece.style.left = xPos + 'px';
+                confettiPiece.style.animationDelay = delay + 's';
+                confettiPiece.style.animationDuration = animationDuration + 's';
+                confetti.appendChild(confettiPiece);
+            }
+        }
+
+        // Calculate reward points based on ratings
+        function calculateRewardPoints(place, rate, surrounding) {
+            let totalPoints = 0;
+            totalPoints += parseInt(place);
+            totalPoints += parseInt(rate);
+            totalPoints += parseInt(surrounding);
+            return totalPoints;
+        }
+    </script>
+
+</body>
+</html>

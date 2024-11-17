@@ -1,0 +1,11 @@
+body{
+    background-image: url("https://www.travelpack.in/public/imagedb/sysimgdocs/rszimages/Monsoon-In-Karnataka_pk26554_1.gif");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+}
+#layer{
+    background-color:white;
+    text-align:center;
+    opacity: 0.6;
+}

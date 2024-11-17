@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nearby Events & Festivals</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: #333;
+      line-height: 1.6;
+    }
+    .header {
+      text-align: center;
+      background-color: black;
+      color: #fff;
+      padding: 50px 20px;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    .events-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 20px;
+      margin: 20px;
+    }
+
+    .event-card {
+      position: relative;
+      background: black;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .event-card:hover {
+      transform: scale(1.05);
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .event-details {
+      padding: 20px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: black;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .event-card:hover .event-details {
+      opacity: 1;
+    }
+
+    .event-details h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .event-details .date {
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .event-details .location {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .event-details .btn {
+      padding: 10px 20px;
+      background-color: #ff6f61;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .event-details .btn:hover {
+      background-color: #ff4f3f;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: #fff;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+      padding-top: 60px;
+    }
+    .modal-content {
+      background-color: black;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 8px;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <h1>Nearby Events & Festivals</h1>
+    <p>Find events, festivals, and concerts happening near you!</p>
+  </header>
+  <div class="events-container">
+    <div class="event-card">
+      <img src="https://tse1.mm.bing.net/th?id=OIP.lwTv3-vIY_1nljQiLmpP5AAAAA&pid=Api&P=0&h=180" alt="Festival 1">
+      <div class="event-details">
+        <h2>Summer Music Festival</h2>
+        <p class="date">December 6, 2024</p>
+        <p class="location">Sunburn,Bangalore</p>
+        <button class="btn" onclick="openModal('Summer Music Festival', 'Sunburn, Bangalore', 'Decembr 6, 2024', 'Join us for a fun-filled day of music, food, and entertainment! The Summer Music Festival is one of the most anticipated events of the year in Bangalore!')">View Details</button>
+      </div>
+    </div>
+    <div class="event-card">
+      <img src="https://thumbs.dreamstime.com/b/rock-concert-large-group-happy-people-enjoying-clapping-raised-up-hands-blue-lights-stage-new-year-celebration-46521228.jpg" alt="Concert 1">
+      <div class="event-details">
+        <h2>Rock Concert</h2>
+        <p class="date">December 30, 2024</p>
+        <p class="location">Palace Ground ,Bangalore</p>
+        <button class="btn" onclick="openModal('Rock Concert', 'Palace Ground, Bangalore', 'December 30, 2024', 'Get ready for an unforgettable night of rock music with top bands performing live at Palace Ground!')">View Details</button>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <img src="https://www.purplepass.com/blog/wp-content/uploads/2022/06/people-at-food-festival.jpg" alt="Festival 2">
+      <div class="event-details">
+        <h2>Food Festival</h2>
+        <p class="date">January 18, 2025</p>
+        <p class="location">Whitefield,Bangalore</p>
+        <button class="btn" onclick="openModal('Food Festival', 'Whitefield, Bangalore', 'Janauary 18, 2025', 'Savor the best food from local vendors and international chefs at the annual Food Festival in Whitefield!')">View Details</button>
+      </div>
+    </div>
+  
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title"></h2>
+      <p><strong>Date:</strong> <span id="modal-date"></span></p>
+      <p><strong>Location:</strong> <span id="modal-location"></span></p>
+      <p id="modal-description"></p>
+    </div>
+  </div>
+
+  <script>
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    function openModal(title, location, date, description) {
+      document.getElementById("modal-title").innerText = title;
+      document.getElementById("modal-date").innerText = date;
+      document.getElementById("modal-location").innerText = location;
+      document.getElementById("modal-description").innerText = description;
+      modal.style.display = "block";
+    }
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+        </div>
+    </section>
+</main>
+<main>
+<title>Cultural Tips & Phrases</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7); 
+      z-index: 9999;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .modal h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .modal p {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    .modal ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .modal ul li {
+      margin: 10px 0;
+    }
+
+    .modal button {
+      background-color: #ff6f61;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .modal button:hover {
+      background-color: #ff4f3f;
+    }
+    .banner {
+      display: none;
+      background-color: #ff6f61;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      font-size: 1.2em;
+    }
+
+    .banner button {
+      background-color: #ff4f3f;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .banner button:hover {
+      background-color: #ff6f61;
+    }
+  </style>
+</head>
+<body>
+  <div id="culturalModal" class="modal">
+    <h2>Welcome to Bangalore!</h2>
+    <p><strong>Helpful Phrases:</strong></p>
+    <ul>
+      <li><strong>Hello:</strong> "Namaste"</li>
+      <li><strong>Thank you:</strong> "Dhanyavaad"</li>
+      <li><strong>Goodbye:</strong> "Alvida"</li>
+    </ul>
+    <p><strong>Cultural Tips:</strong></p>
+    <ul>
+      <li>It is customary to greet people with "Namaste" and a slight bow.</li>
+      <li>Always remove your shoes before entering someone's house or a temple.</li>
+      <li>Be respectful when interacting with elders – it’s an important part of the culture.</li>
+    </ul>
+    <button onclick="closeModal()">Close</button>
+  </div>
+  <div id="culturalBanner" class="banner">
+    <h3>Quick Tip: Bangalore</h3>
+    <p>When visiting temples, be sure to dress modestly and remove your shoes before entering.</p>
+    <button onclick="closeBanner()">Got it!</button>
+  </div>
+
+  <script>
+    function getUserRegion(callback) {
+      let region = "Bangalore";  
+      callback(region);
+    }
+    function showModal(region) {
+      if (region === "Bangalore") {
+        document.getElementById("culturalModal").style.display = "block";
+      }
+    }
+    function showBanner(region) {
+      if (region === "Bangalore") {
+        document.getElementById("culturalBanner").style.display = "block";
+      }
+    }
+    function closeModal() {
+      document.getElementById("culturalModal").style.display = "none";
+    }
+    function closeBanner() {
+      document.getElementById("culturalBanner").style.display = "none";
+    }
+    getUserRegion(function(region) {
+      showModal(region);
+      showBanner(region);
+    });
+  </script>
+</body>
+</main>
+    <main>
+        <footer>
+            <div class="container" id="container">
+                <p>&copy; 2024 [Your Travel Company Name]. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>

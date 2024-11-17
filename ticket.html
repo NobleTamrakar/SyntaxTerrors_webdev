@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moops Ticket Booking with Mooney</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #007bff;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="email"], input[type="number"], input[type="date"], select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .confirmation-message {
+      display: none;
+      background-color: #e7f4e4;
+      color: #4caf50;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .error-message {
+      display: none;
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .mooney-info {
+      background-color: #f0f8ff;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 4px;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .mooney-info strong {
+      color: #007bff;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Book Your Tickets for Moops</h2>
+    
+    <!-- Ticket Booking Form -->
+    <form id="ticket-form">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="tickets">Number of Tickets</label>
+      <input type="number" id="tickets" name="tickets" min="1" max="10" placeholder="Number of tickets" required>
+
+      <label for="date">Select a Date</label>
+      <input type="date" id="date" name="date" required>
+
+      <!-- Source Field (Bangalore places) -->
+      <label for="source">Source (Starting Point)</label>
+      <select id="source" name="source" required>
+        <option value="" disabled selected>Select your source</option>
+        <option value="MG Road">MG Road</option>
+        <option value="Koramangala">Koramangala</option>
+        <option value="Whitefield">Whitefield</option>
+        <option value="Indiranagar">Indiranagar</option>
+        <option value="Banaswadi">Banaswadi</option>
+        <option value="Jayanagar">Jayanagar</option>
+        <option value="Banashankari">Banashankari</option>
+        <option value="Marathahalli">Marathahalli</option>
+        <option value="Hebbal">Hebbal</option>
+        <option value="Yelahanka">Yelahanka</option>
+        <option value="Hennur">Hennur</option>
+        <option value="Vidhana Soudha">Vidhana Soudha</option>
+        <option value="UB City">UB City</option>
+      </select>
+
+      <!-- Destination Field (Bangalore places) -->
+      <label for="destination">Destination</label>
+      <select id="destination" name="destination" required>
+        <option value="" disabled selected>Select your destination</option>
+        <option value="MG Road">MG Road</option>
+        <option value="Koramangala">Koramangala</option>
+        <option value="Whitefield">Whitefield</option>
+        <option value="Indiranagar">Indiranagar</option>
+        <option value="Banaswadi">Banaswadi</option>
+        <option value="Jayanagar">Jayanagar</option>
+        <option value="Banashankari">Banashankari</option>
+        <option value="Marathahalli">Marathahalli</option>
+        <option value="Hebbal">Hebbal</option>
+        <option value="Yelahanka">Yelahanka</option>
+        <option value="Hennur">Hennur</option>
+        <option value="Vidhana Soudha">Vidhana Soudha</option>
+        <option value="UB City">UB City</option>
+      </select>
+
+      <button type="submit">Book Tickets</button>
+    </form>
+
+    <!-- Mooney Info -->
+    <div id="mooney-info" class="mooney-info">
+      <p><strong>Total Mooney Balance:</strong> <span id="total-mooney">100</span> Mooney</p>
+      <p><strong>Ticket Price:</strong> 10 Mooney per ticket</p>
+    </div>
+
+    <!-- Confirmation message -->
+    <div id="confirmation" class="confirmation-message">
+      <h3>Booking Confirmed!</h3>
+      <p>Your tickets for Moops have been successfully booked.</p>
+      <p><strong>Name:</strong> <span id="confirmed-name"></span></p>
+      <p><strong>Email:</strong> <span id="confirmed-email"></span></p>
+      <p><strong>Tickets:</strong> <span id="confirmed-tickets"></span></p>
+      <p><strong>Date:</strong> <span id="confirmed-date"></span></p>
+      <p><strong>Source:</strong> <span id="confirmed-source"></span></p>
+      <p><strong>Destination:</strong> <span id="confirmed-destination"></span></p>
+      <p><strong>Mooney Spent:</strong> <span id="confirmed-mooney"></span> Mooney</p>
+    </div>
+
+    <!-- Error message -->
+    <div id="error" class="error-message">
+      <p>You don't have enough Mooney to book this many tickets.</p>
+    </div>
+  </div>
+
+  <script>
+    // Get the form and elements
+    const form = document.getElementById('ticket-form');
+    const confirmationMessage = document.getElementById('confirmation');
+    const errorMessage = document.getElementById('error');
+    const totalMooneyDisplay = document.getElementById('total-mooney');
+    const mooneyInfo = document.getElementById('mooney-info');
+
+    // Initialize the total Mooney balance
+    let totalMooney = 100; // User starts with 100 Mooney
+
+    // Ticket price in Mooney
+    const mooneyPerTicket = 10;
+
+    // Update the total Mooney display
+    function updateMooney() {
+      totalMooneyDisplay.textContent = totalMooney;
+    }
+
+    // Handle form submission
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form from submitting traditionally
+
+      // Get user inputs
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const tickets = document.getElementById('tickets').value;
+      const date = document.getElementById('date').value;
+      const source = document.getElementById('source').value;
+      const destination = document.getElementById('destination').value;
+
+      // Calculate the cost of the tickets
+      const totalCost = tickets * mooneyPerTicket;
+
+      // Validate the form and check if user has enough Mooney
+      if (name === '' || email === '' || tickets === '' || date === '' || source === '' || destination === '') {
+        // Show error message if fields are missing
+        errorMessage.style.display = 'none';
+        confirmationMessage.style.display = 'none';
+        alert("Please fill out all fields.");
+      } else if (totalCost > totalMooney) {
+        // Show error if the user doesn't have enough Mooney
+        errorMessage.style.display = 'block';
+        confirmationMessage.style.display = 'none';
+      } else {
+        // Deduct Mooney for the ticket purchase
+        totalMooney -= totalCost;
+
+        // Hide error message and show confirmation message
+        errorMessage.style.display = 'none';
+        confirmationMessage.style.display = 'block';
+
+        // Display the confirmation details
+        document.getElementById('confirmed-name').textContent = name;
+        document.getElementById('confirmed-email').textContent = email;
+        document.getElementById('confirmed-tickets').textContent = tickets;
+        document.getElementById('confirmed-date').textContent = date;
+        document.getElementById('confirmed-source').textContent = source;
+        document.getElementById('confirmed-destination').textContent = destination;
+        document.getElementById('confirmed-mooney').textContent = totalCost;
+
+        // Update Mooney balance display
+        updateMooney();
+
+        // Clear the form
+        form.reset();
+      }
+    });
+
+    // Initialize Mooney display on page load
+    updateMooney();
+  </script>
+
+</body>
+</html>

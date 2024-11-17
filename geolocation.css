@@ -1,0 +1,60 @@
+#map {
+    height: 250px; 
+    width: 400px;  
+    margin: auto; 
+    border: 1px solid #ccc; 
+}
+#suggestions {
+    width: 400px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+#suggestions ul {
+    list-style-type: none;
+    padding: 0;
+}
+#suggestions ul li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+#suggestions ul li:last-child {
+    border-bottom: none;
+}
+#suggestions ul li b {
+    color: #333;
+}
+.user-location-icon {
+    border: 2px solid #ff0000;
+    border-radius: 50%;
+    background-color: #ff0000;
+    width: 15px;
+    height: 15px;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+    animation: pulse 1.5s infinite;
+}
+
+/* Animation for the glowing effect */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+    }
+}
+
+body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+h1 { color: #333; }
+p { margin: 10px 0; }
+span { font-weight: bold; }
+img { max-width: 100%; height: auto; margin-bottom: 20px; }
+button { padding: 10px 20px; background: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; }
+button:hover { background: #0056b3; }
