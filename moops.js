@@ -6,7 +6,8 @@ function search() {
     
     // Check for empty input
     if (!queryName) {
-        alert("Please enter a valid search query.");
+        alert(`Please enter a valid search query.
+        Try using: Bangalore Palace`);
         return;
     }
     const result = data.find(item => item.name.toLowerCase() === queryName.toLowerCase());
