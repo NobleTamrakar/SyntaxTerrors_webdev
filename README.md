@@ -1,8 +1,8 @@
 This are the Bonus Points 
 <br> 
-bp1&2.html
+@bp1&2.html
 <br>
-bp3.html
+@bp3.html
 <br>
 # About our MOOPS!
 The platform starts with a sign-in process, after which
